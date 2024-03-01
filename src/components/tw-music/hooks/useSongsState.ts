@@ -1,12 +1,14 @@
 import { createInjectionState } from '@vueuse/shared'
 import { ISong } from '../type.ts'
-import { log } from 'console'
+
 
 type initialValue = {
   songs: Array<ISong>,
   currentIndex: number,
   audio: Ref<HTMLAudioElement | undefined>,
-  isShowList: boolean
+  isShowList: boolean,
+  title: string,
+  color: string,
 }
 
 const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue: initialValue) => {
@@ -18,12 +20,12 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
   const findCurrentSong = computed(() => {
     return songs.value[currentIndex.value]
   })
-
+  /* 找到正在播放的音乐的src */
   const currentSrc = computed(() => {
     return findCurrentSong.value.url
   })
   /* 歌曲的信息 */
-  const { playing, currentTime, duration, volume, waiting, muted } = useMediaControls(initialValue.audio, {
+  const { playing, currentTime, duration, volume, muted, ended } = useMediaControls(initialValue.audio, {
     src: currentSrc
   })
   /* 是否展开songList */
@@ -39,7 +41,7 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
   /* 点击下一首 */
   const next = () => {
     let index = currentIndex.value
-    if (index === songs.value.length) {
+    if (index === songs.value.length - 1) {
       index = 0
     } else {
       index += 1
@@ -47,7 +49,7 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
     console.log(index, 'nextindex')
     changeCurrentIndex(index)
   }
-
+  /* 点击上一曲 */
   const previous = () => {
     let index = currentIndex.value
     if (index === 0) {
@@ -57,22 +59,28 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
     }
     changeCurrentIndex(index)
   }
-
+  /* 点击播放列表 */
   const changeShowList = () => {
     isShowList.value = !isShowList.value
   }
+
 
 
   /**
    * 修改播放的音乐
    */
   const changeCurrentIndex = (index: number) => {
-    console.log(waiting.value, 'index')
     currentIndex.value = index;
     currentTime.value = 0;
-    console.log(findCurrentSong.value)
-    play();
+    playing.value = false
+    setTimeout(() => {
+      playing.value = true
+    })
   }
+
+  watch(ended, () => {
+    next()
+  })
 
   return {
     currentIndex,
@@ -90,6 +98,8 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
     isShowList,
     next,
     previous,
+    title: initialValue.title,
+    color: initialValue.color
   }
 })
 

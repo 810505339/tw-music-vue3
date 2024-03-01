@@ -44,7 +44,9 @@ const songs: ISong[] = [
 <template>
     <!-- <button @click="playing=!playing">an</button> -->
     <!-- <audio ref="audio"></audio> -->
-    <TwMusic :songs="songs" class="m-20" />
+    <div class="m-20 ">
+        <TwMusic :songs="songs" title="TW Muisc" color="text-[#6420AA]" />
+    </div>
 </template>
 
 <style scoped>

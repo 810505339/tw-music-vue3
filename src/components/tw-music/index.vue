@@ -13,7 +13,9 @@ useProvideSongsStore({
     currentIndex: 0,
     songs: props.songs,
     audio: audio,
-    isShowList: false
+    isShowList: false,
+    title: props.title,
+    color: props.color
 })
 
 const songsStore = useSongsStore()
@@ -33,5 +35,5 @@ const boxStyle = computed(() => {
         <List :songs="props.songs" v-show="songsStore?.isShowList.value" />
     </div>
 
-    <audio ref="audio"></audio>
+    <audio ref="audio" @canplay=""></audio>
 </template>

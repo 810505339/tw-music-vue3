@@ -28,10 +28,10 @@ function play() {
   <div ml-24 flex items-center justify-center h-full>
     <div text-30px flex-auto flex items-center justify-between pr-5 v-if="props.isHover">
       <i i-mdi:skip-previous icon-btn @click="songsStore?.previous()"></i>
-      <i icon-btn :class="isPlayIcon" @click="play"></i>
+      <i icon-btn @click="play" :class="[songsStore?.color, isPlayIcon]"></i>
       <i i-mdi:skip-next icon-btn @click="songsStore?.next()"></i>
       <i i-mdi:playlist-music text-20px icon-btn @click="songsStore?.changeShowList"></i>
     </div>
-    <div v-else> qq音乐 听我想听</div>
+    <div v-else>{{ songsStore?.title }}</div>
   </div>
 </template>
