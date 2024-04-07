@@ -23,17 +23,17 @@ const songsStore = useSongsStore()
 
 
 const boxStyle = computed(() => {
-    return songsStore?.isShowList.value ? `border-b` : ``
+    return songsStore?.isShowList.value ? `border-t` : ``
 })
 </script>
 <template>
-    <div w-82 shadow rounded-2>
-        <div h-18 relative :class="[boxStyle]" ref="box" font-sans>
+    <div w-82 shadow-md rounded-2>
+        <div h-18 relative box-border ref="box" font-sans>
             <Cover :img="songsStore?.findCurrentSong.value.cover" />
             <Context :is-hover="!isOutside" />
         </div>
-        <List :songs="props.songs" v-show="songsStore?.isShowList.value" />
+        <List :songs="props.songs" :class="[boxStyle]" v-show="songsStore?.isShowList.value" />
     </div>
 
-    <audio ref="audio" @canplay=""></audio>
+    <audio ref="audio" />
 </template>

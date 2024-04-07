@@ -14,6 +14,9 @@ dependencies:
   '@vueuse/shared':
     specifier: ^10.8.0
     version: 10.8.0(vue@3.4.19)
+  lrc-file-parser:
+    specifier: ^2.4.1
+    version: 2.4.1
   simplebar-vue:
     specifier: ^2.3.3
     version: 2.3.3(vue@3.4.19)
@@ -1591,6 +1594,10 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: false
+
+  /lrc-file-parser@2.4.1:
+    resolution: {integrity: sha512-vriDfIyKqdL7xUOHzsAojY/LwfsLBx/Lnob/9EzIx89ZtHLCFl8ewAeR7LaFC+frw8ITRDSgr3mzyb7cZPXYNg==}
     dev: false
 
   /lru-cache@5.1.1:

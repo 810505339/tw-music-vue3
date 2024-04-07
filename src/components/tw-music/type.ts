@@ -8,6 +8,6 @@ export interface ISong {
 
 export interface IProps {
   songs: Array<ISong>,
-  title: string,
-  color: string,
+  title?: string,
+  color?: string,
 }

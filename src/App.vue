@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ISong } from '@/components/tw-music/type'
+import useLyrics from '@/components/tw-music/hooks/useLyrics'
+
+useLyrics()
 
 const songs: ISong[] = [
     {
@@ -44,10 +47,9 @@ const songs: ISong[] = [
 <template>
     <!-- <button @click="playing=!playing">an</button> -->
     <!-- <audio ref="audio"></audio> -->
-    <div class="m-20 ">
-        <TwMusic :songs="songs" title="TW Muisc" color="text-[#6420AA]" />
+    <div m-20>
+        <TwMusic :songs="songs" title="TW Music" color="text-[#6420AA]" />
     </div>
 </template>
 
-<style scoped>
-</style>
+<style></style>
