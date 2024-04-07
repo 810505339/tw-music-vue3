@@ -24,7 +24,6 @@ function play() {
 
 </script>
 <template>
-
   <div pl-24 flex items-center justify-center h-full>
     <div text-30px flex-auto flex items-center justify-between pr-5 v-if="props.isHover">
       <i i-mdi:skip-previous icon-btn @click="songsStore?.previous()"></i>
