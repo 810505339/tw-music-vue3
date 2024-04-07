@@ -1,5 +1,7 @@
+import { Lines } from 'lrc-file-parser'
 import { createInjectionState } from '@vueuse/shared'
 import { ISong } from '../type.ts'
+import useLyrics from './useLyrics.ts'
 
 
 type initialValue = {
@@ -16,10 +18,17 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
   const songs = ref(initialValue.songs)
   /* 选中的音乐 */
   const currentIndex = ref(initialValue.currentIndex)
+
+  /* 歌词 */
+  const { playLyric, pauseLyric, setLyric, playlines } = useLyrics()
+
   /**找到正在播放的音乐 */
   const findCurrentSong = computed(() => {
+    setLyric(songs.value[currentIndex.value].lyrics)
+
     return songs.value[currentIndex.value]
   })
+
   /* 找到正在播放的音乐的src */
   const currentSrc = computed(() => {
     return findCurrentSong.value.url
@@ -33,10 +42,12 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
   /* 点击播放 */
   const play = () => {
     playing.value = true
+    playLyric(currentTime.value)
   }
   /* 点击暂停 */
   const stop = () => {
     playing.value = false
+    pauseLyric()
   }
   /* 点击下一首 */
   const next = () => {
@@ -72,9 +83,9 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
   const changeCurrentIndex = (index: number) => {
     currentIndex.value = index;
     currentTime.value = 0;
-    playing.value = false
+    stop()
     setTimeout(() => {
-      playing.value = true
+      play()
     })
   }
 
@@ -99,7 +110,8 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
     next,
     previous,
     title: initialValue.title,
-    color: initialValue.color
+    color: initialValue.color,
+    playlines: playlines
   }
 })
 

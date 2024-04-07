@@ -1,4 +1,4 @@
-import Lyric from 'lrc-file-parser'
+import Lyric, { Lines } from 'lrc-file-parser'
 //useLyrics
 //lrc-file-parser
 
@@ -52,13 +52,17 @@ const test = `[00:01.50]时间煮雨
 [03:55.39]`
 
 export default () => {
+  const playlines = ref<string>('')
+
   var lrc = new Lyric({
     onPlay: function (line, text) { // Listening play event
       console.log(line, text) // line is line number of current play
+      console.log(text, 'text')
+      playlines.value = text
       // text is lyric text of current play line
     },
     onSetLyric: function (lines) { // listening lyrics seting event
-      console.log(lines) // lines is array of all lyric text
+
     },
     offset: 150, // offset time(ms), default is 150 ms
     playbackRate: 1, // playback rate, default is 1
@@ -70,19 +74,18 @@ export default () => {
     lrc.setLyric(lyric)
   }
 
-  function playLyric(curTime?: number) {
-    lrc.play(curTime)
+  function playLyric(curTime: number) {
+    console.log(curTime, 'curTime')
+    lrc.play(curTime * 1000)
   }
 
-
-
-
-  lrc.setLyric(test) // set lyric, lyricStr is lyric file text, extendedLyricStrs is extended lyric file text array (optional)
-  // note: Setting the lyrics will automatically pause the lyrics playback
-  lrc.play(0) // play lyric, 30000 is curent play time, unit: ms
-
+  function pauseLyric() {
+    lrc.pause()
+  }
   return {
     setLyric,
     playLyric,
+    pauseLyric,
+    playlines,
   }
 }

@@ -5,7 +5,7 @@ import { useSongsStore } from '../hooks/useSongsState';
 const songsStore = useSongsStore()
 const props = defineProps<IProps>()
 
-function stlye(i: number) {
+function style(i: number) {
   return songsStore?.currentIndex.value === i ? songsStore.color : ``
 }
 /* 当前是否选中了歌曲并且正在播放 */
@@ -31,7 +31,7 @@ function handlePlay(i: number) {
   <simplebar h-40 rounded-b-2>
     <div divide-y>
       <div v-for="(song, index) in songs" :key="index" text-12px h-10 flex items-center justify-between px-4
-        hover="bg-gray-50 " :class="[stlye(index), 'group']">
+        hover="bg-gray-50 " :class="[style(index), 'group']">
         <div truncate font-500 flex-auto>{{ song.name }} - {{ song.artist }}</div>
         <div hidden class="group-hover:block">
           <i i-mdi:play icon-btn v-show="!showPause(index)" @click="handlePlay(index)"></i>
@@ -45,6 +45,6 @@ function handlePlay(i: number) {
 
 <style scoped>
 :deep(.simplebar-vertical) {
-  width:5px;
+  width: 5px;
 }
 </style>

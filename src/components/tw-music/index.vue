@@ -20,6 +20,7 @@ useProvideSongsStore({
 
 const songsStore = useSongsStore()
 
+console.log(songsStore?.playInfo);
 
 
 const boxStyle = computed(() => {
