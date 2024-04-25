@@ -14,8 +14,8 @@ useProvideSongsStore({
     songs: props.songs,
     audio: audio,
     isShowList: false,
-    title: props.title,
-    color: props.color
+    title: props.title || '',
+    color: props.color || ''
 })
 
 const songsStore = useSongsStore()

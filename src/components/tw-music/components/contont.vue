@@ -19,11 +19,9 @@ function play() {
   }
 }
 
-
-
-
 </script>
 <template>
+
   <div pl-24 flex items-center justify-center h-full>
     <div text-30px flex-auto flex items-center justify-between pr-5 v-if="props.isHover">
       <i i-mdi:skip-previous icon-btn @click="songsStore?.previous()"></i>
@@ -31,7 +29,11 @@ function play() {
       <i i-mdi:skip-next icon-btn @click="songsStore?.next()"></i>
       <i i-mdi:playlist-music text-20px icon-btn @click="songsStore?.changeShowList"></i>
     </div>
-    <!-- <div v-else>{{ songsStore?.title }}</div> -->
-    <div v-else whitespace-nowrap px-5 overflow-auto>{{ playlines }}</div>
+
+    <div v-else>
+      <div px-5 text-center>{{ songsStore?.findCurrentSong.value.name }}</div>
+      <div whitespace-nowrap px-5 overflow-auto text-xs text-center>{{ playlines }}</div>
+    </div>
+
   </div>
 </template>

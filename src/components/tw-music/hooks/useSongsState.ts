@@ -25,7 +25,6 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
   /**找到正在播放的音乐 */
   const findCurrentSong = computed(() => {
     setLyric(songs.value[currentIndex.value].lyrics)
-
     return songs.value[currentIndex.value]
   })
 
@@ -101,7 +100,8 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
       playing,
       currentTime,
       duration,
-      volume
+      volume,
+      song: songs
     },
     play,
     stop,
