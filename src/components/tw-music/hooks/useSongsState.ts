@@ -1,4 +1,3 @@
-import { Lines } from 'lrc-file-parser'
 import { createInjectionState } from '@vueuse/shared'
 import { ISong } from '../type.ts'
 import useLyrics from './useLyrics.ts'
@@ -33,7 +32,7 @@ const [useProvideSongsStore, useSongsStore] = createInjectionState((initialValue
     return findCurrentSong.value.url
   })
   /* 歌曲的信息 */
-  const { playing, currentTime, duration, volume, muted, ended } = useMediaControls(initialValue.audio, {
+  const { playing, currentTime, duration, volume, ended } = useMediaControls(initialValue.audio, {
     src: currentSrc
   })
   /* 是否展开songList */
@@ -127,9 +126,4 @@ export function useSongsStoreWithDefaultValue() {
   }
 }
 
-export function useCounterStoreOrThrow() {
-  const counterStore = useCounterStore()
-  if (counterStore == null)
-    throw new Error('Please call `useProvideCounterStore` on the appropriate parent component')
-  return counterStore
-}
+

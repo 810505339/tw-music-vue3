@@ -3,7 +3,7 @@ import { IProps } from '../type';
 import simplebar from 'simplebar-vue';
 import { useSongsStore } from '../hooks/useSongsState';
 const songsStore = useSongsStore()
-const props = defineProps<IProps>()
+defineProps<IProps>()
 
 function style(i: number) {
   return songsStore?.currentIndex.value === i ? songsStore.color : ``
